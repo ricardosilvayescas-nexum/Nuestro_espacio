@@ -1,0 +1,162 @@
+
+        /* --- ESTILOS PRINCIPALES --- */
+        :root {
+            --bg-gradient: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+            --primary-pink: #ff6b6b;
+            --polaroid-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-gradient);
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow-x: hidden;
+            overflow-y: hidden; /* Evita scroll */
+        }
+
+        /* --- TARJETA INICIAL (Mantenemos tu galería favorita) --- */
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+            position: relative;
+            z-index: 10;
+            transition: opacity 0.5s ease, transform 0.5s ease; /* Transición suave */
+        }
+
+        .container.hidden {
+            opacity: 0;
+            transform: scale(0.9); /* Efecto de encogido al desaparecer */
+            pointer-events: none; /* No interactuable */
+        }
+
+        h1 { color: var(--primary-pink); font-size: 2.2rem; margin-bottom: 0.5rem; text-shadow: 1px 1px 2px rgba(0,0,0,0.05); }
+        .subtitle { font-weight: bold; color: #555; margin-bottom: 1.5rem; }
+
+        .timer-box {
+            background: white; padding: 1.2rem; border-radius: 15px;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.05); margin-bottom: 2rem;
+        }
+        .number { font-size: 3.5rem; font-weight: bold; color: var(--primary-pink); display: block; animation: pulse 1.5s infinite; }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.08); color: #ff8787; }
+            100% { transform: scale(1); }
+        }
+
+        /* TU GALERÍA DE INICIO FAVORITA */
+        .gallery {
+            display: flex; gap: 10px; justify-content: center; margin-bottom: 2rem;
+        }
+
+        .polaroid {
+            background: white; padding: 10px 10px 20px 10px; border-radius: 5px;
+            box-shadow: var(--polaroid-shadow); width: 110px;
+            transform: rotate(-5deg); transition: transform 0.3s;
+        }
+        .polaroid:nth-child(2) { transform: rotate(5deg); }
+        .polaroid:hover { transform: scale(1.05) rotate(0deg); z-index: 15; }
+
+        .polaroid img { width: 100%; height: 100px; object-fit: cover; border: 1px solid #eee; }
+        .caption { font-size: 0.7rem; color: #777; margin-top: 5px; }
+
+        .btn-love {
+            background: var(--primary-pink); color: white; border: none;
+            padding: 15px 30px; font-size: 1.1rem; font-weight: bold;
+            border-radius: 50px; cursor: pointer;
+            box-shadow: 0 5px 20px rgba(255, 107, 107, 0.4); transition: all 0.3s;
+        }
+        .btn-love:hover { background: #ff8787; transform: translateY(-3px); box-shadow: 0 8px 25px rgba(255, 107, 107, 0.5); }
+
+        /* --- PANTALLA DE SORPRESA (Actualizada) --- */
+        .rain-overlay {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(255, 245, 247, 0.98); /* Fondo rosado muy suave y opaco */
+            z-index: 20; display: none; /* Oculto al inicio */
+            flex-direction: column; justify-content: center; align-items: center;
+        }
+
+        .falling-photo {
+            position: absolute; width: 140px; height: 140px; object-fit: cover;
+            border: 8px solid white; border-bottom: 30px solid white; /* Polaroid */
+            box-shadow: var(--polaroid-shadow); border-radius: 4px;
+            top: -250px; /* Inician fuera */
+            z-index: 25;
+            opacity: 0; /* Ocultas al inicio */
+        }
+
+        /* --- ANIMACIONES (La clave del cambio) --- */
+        
+        /* 1. Caída suave que no llega al suelo */
+        @keyframes fallSmoothly {
+            0% { transform: translateY(0) rotate(-15deg); opacity: 0; }
+            10% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { transform: translateY(85vh) rotate(15deg); opacity: 0; } /* Se desvanecen antes de amontonarse */
+        }
+
+        /* 2. Flotado aleatorio en toda la pantalla */
+        @keyframes floatGently {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(50px, -50px) rotate(5deg); }
+            50% { transform: translate(-50px, 50px) rotate(-5deg); }
+            75% { transform: translate(30px, 30px) rotate(3deg); }
+        }
+/* Limpia o reemplaza estas clases en tu style.css */
+
+.floating-photo {
+    position: absolute;
+    width: 130px; 
+    height: 130px;
+    object-fit: cover;
+    border: 8px solid white;
+    border-bottom: 30px solid white;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    border-radius: 4px;
+    opacity: 0; /* Inicia invisible para el fade-in */
+    transition: opacity 1.5s ease;
+    z-index: 10;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(var(--rot)); }
+    50% { transform: translateY(-15px) rotate(var(--rot-alt)); }
+}
+
+/* Importar la fuente al principio de tu CSS */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+
+.final-message {
+    font-family: 'Dancing Script', cursive; /* Fuente elegante como la foto */
+    opacity: 0;
+    color: #d6336c;
+    font-size: 2.5rem; /* Tamaño para la frase larga */
+    text-align: center;
+    line-height: 1.3;
+    transition: opacity 2s ease-in-out;
+    z-index: 100;
+}
+
+.final-message span {
+    display: block;
+    font-size: 4rem; /* El "Te amo" más grande */
+    margin-top: 15px;
+    color: #c72c5e;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
+}
+
+/* Animación de flotado suave individual */
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(var(--rot)); }
+    50% { transform: translateY(-15px) rotate(var(--rot-alt)); }
+}
