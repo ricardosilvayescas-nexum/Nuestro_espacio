@@ -159,4 +159,36 @@
 @keyframes float {
     0%, 100% { transform: translateY(0) rotate(var(--rot)); }
     50% { transform: translateY(-15px) rotate(var(--rot-alt)); }
+
+}
+
+/* Ajustes para pantallas de menos de 480px (como tu iPhone) */
+@media (max-width: 480px) {
+    .card {
+        width: 85% !important; /* Hace la tarjeta más estrecha */
+        padding: 15px !important;
+        margin: 10px auto !important;
+    }
+
+    .card h1 {
+        font-size: 1.5rem !important; /* Reduce el tamaño del título */
+    }
+
+    .polaroid {
+        width: 120px !important; /* Reduce el ancho de las fotos */
+        margin: 5px !important;
+    }
+
+    .polaroid img {
+        height: 100px !important; /* Ajusta la altura de la imagen interna */
+    }
+
+    p {
+        font-size: 1rem !important; /* Texto más legible en móvil */
+    }
+    
+    .boton-toca-aqui {
+        padding: 10px 20px !important;
+        font-size: 0.9rem !important;
+    }
 }
