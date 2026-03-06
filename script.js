@@ -19,12 +19,12 @@ const posiciones = [
 
         // Lista de tus 6 fotos
         const misFotos = [
-            'fotos/Boda_alin.jpg', 
-            'fotos/mina.png', 
-            'fotos/mina_2.png', 
-            'fotos/Navidad_2.jpg', 
-            'fotos/pachuca.png', 
-            'fotos/burbujas.png'
+            'Boda_alin.jpg', 
+            'mina.png', 
+            'mina_2.png', 
+            'Navidad_2.jpg', 
+            'pachuca.png', 
+            'burbujas.png'
         ];
 
         posiciones.forEach((pos, i) => {
